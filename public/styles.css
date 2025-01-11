@@ -1,0 +1,10 @@
+body {
+    font-family: Gill Sans, serif;
+    background-color: #aed6ff;
+}
+
+.app {
+    background-color: #cbfadd;
+    width: 65%;
+    margin: auto;
+}
