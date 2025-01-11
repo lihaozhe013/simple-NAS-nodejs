@@ -7,13 +7,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1 style="text-align: center;">LAN 网盘</h1>
+    <h1 style="text-align: center; font-family: monospace;">LAN Cloud Drive</h1>
     <div id="app" class="app">
         <form action="/upload" method="post" enctype="multipart/form-data">
             <input type="file" name="file" />
             <button type="submit">上传文件</button>
         </form>
         <p>文件列表: <a href="/files">浏览文件</a></p>
+        <img src="avatar.jpeg" width="45%" height="45%" style="margin-left: auto; margin-right: auto; display: block;"/>
+        <br>
+        <p style="font-size: 18px; font-family: monospace; text-align: center;">This page has No Fucking Copyright.</p>
+        <br>
+        <div style="font-size: 13px; font-family: monospace; text-align: center;">
+            <p>Build by Haozhe Li, 2052-13-32</p>
+            <a href="https://github.com/lihaozhe013/">Github Page</a>
+        </div>
+        <br>
     </div>
 
 </body>
