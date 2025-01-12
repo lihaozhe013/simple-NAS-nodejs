@@ -6,38 +6,41 @@ const fs = require('fs');
 
 const app = express();
 const PORT = 8000;
-const HOST = '0.0.0.0'; // 确保可以通过局域网访问
+const HOST = '0.0.0.0';
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
+const NEW_UPLOAD_DIR = path.join(__dirname, 'uploads/new_upload_things');
 
-// 创建文件夹用于存储上传的文件
+// create folder 'upload' if dne
 if (!fs.existsSync(UPLOAD_DIR)) {
     fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 }
 
-// 设置静态文件和文件浏览
+// setup static files
 app.use('/files', express.static(UPLOAD_DIR));
 app.use('/files', serveIndex(UPLOAD_DIR, { icons: true }));
 app.use(express.static('public'));
 
-// 配置 multer 用于文件上传
+// set up multer for file uploading
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => cb(null, UPLOAD_DIR),
-    filename: (req, file, cb) => cb(null, file.originalname),
+    destination: (req, file, cb) => cb(null, NEW_UPLOAD_DIR),
+    // filename: (req, file, cb) => cb(null, file.originalname),
+    filename: function (req, file, cb) { // 确保文件名正确保存为中文 (Chinese Character Support)
+        cb(null, Buffer.from(file.originalname, 'latin1').toString('utf8'));
+    }
 });
 const upload = multer({ storage });
 
-// 上传文件接口
+// file uploading port
 app.post('/upload', upload.single('file'), (req, res) => {
     res.send({ message: 'File uploaded successfully!', file: req.file });
 });
 
-// 主页面：上传表单
-
+// Main Page
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/public/index.html'); // 直接返回 HTML 文件
+    res.sendFile(__dirname + '/public/index.html');
 });
 
-// 启动服务器
+// start
 app.listen(PORT, HOST, () => {
-    console.log(`LAN 网盘运行中: http://${HOST}:${PORT}`);
+    console.log(`LAN Cloud Drive is running: http://${HOST}:${PORT}`);
 });

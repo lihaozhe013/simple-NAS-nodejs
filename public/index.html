@@ -14,10 +14,16 @@
         <fieldset>
             <legend>&nbsp Upload File &nbsp</legend>
             <br>
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <input type="file" name="file" />
-                <button type="submit">Upload</button>
+            <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                <input type="file" name="file" id="fileInput" required/>
+                <button type="submit">Upload File</button>
             </form>
+            <div id="progressContainer">
+                <div id="progressWrapper">
+                    <div id="progressBar"></div>
+                </div>
+                <span id="progressText"></span>
+            </div>
             <br>
         </fieldset>
         <br>
@@ -36,6 +42,6 @@
         </div>
         <br>
     </div>
-
+    <script src="upload.js"></script>
 </body>
 </html>
