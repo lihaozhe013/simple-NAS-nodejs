@@ -9,6 +9,7 @@ const PORT = 8000;
 const HOST = '0.0.0.0';
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 const NEW_UPLOAD_DIR = path.join(__dirname, 'uploads/new_upload_things');
+const PUBLIC_DIR = path.join(__dirname, 'public');
 
 // create folder 'upload' if dne
 if (!fs.existsSync(UPLOAD_DIR)) {
@@ -18,7 +19,7 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 // setup static files
 app.use('/files', express.static(UPLOAD_DIR));
 app.use('/files', serveIndex(UPLOAD_DIR, { icons: true }));
-app.use(express.static('public'));
+app.use(express.static(PUBLIC_DIR));
 
 // set up multer for file uploading
 const storage = multer.diskStorage({
