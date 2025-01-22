@@ -43,5 +43,5 @@ app.get('/', (req, res) => {
 
 // start
 app.listen(PORT, HOST, () => {
-    console.log(`LAN Cloud Drive is running: http://${HOST}:${PORT}`);
+    console.log(`NAS Started: http://${HOST}:${PORT}`);
 });
